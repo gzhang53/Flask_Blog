@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} Post Detail {% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block main %}
+    <h3 style="text-align:center"> {{post.postname}} </h3>
+    <p class="postInfo" style="text-align:center">
+        <span>Author: {{post.author.username}}</span>
+        <span>                        </span>
+        <span>Time: {{post.timestamp}}</span>
+    </p>
+    <hr>
+    <p class="postContent"> {{post.body}}</p>
+    <hr>
+    <h4>Comment:</h4>
+    <form action="{{url_for('add_comment')}}" method="POST">
+        <div class="form-group">
+            <input name = "comment" type="text" class="form-control" placeholder="please enter your comment">
+            <input type="hidden" name="post_id" value="{{post.id}}">
+        </div>
+        <div class="form-group"  style="text-align:right;">
+            <button class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    <ul class="comment-list">
+        {% for commentCollect is post.comments %}
+            <li style="list-style:none; border-bottom:1px solid #eee">
+                <div class="user-info">
+                    <span class="username">{{ commentCollect.author.username}}</span>
+                    <span class="time"></span>
+                </div>
+                <p>{{commentCollect.comment}}</p>
+                
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

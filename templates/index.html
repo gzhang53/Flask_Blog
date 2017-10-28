@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}
+Homepage
+{% endblock %}
+{% block script %}
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock %}
+
+{% block main %}
+{% for post in posts %}
+
+<div class="blog-post">
+          <div class="blog-post">
+              <h2 class="blog-post-title"><a href={{url_for('details',post_id=post.id)}}>{{ post.postname}}</a></h2>
+            <p class="blog-post-meta">{{ post.timestamp}} by <a href=#>{{post.author.username}}</a></p>
+
+            <p>{{ post.body }}</p>
+            <hr>
+
+          </div>
+
+</div>
+{% endfor %}
+{% endblock %}
